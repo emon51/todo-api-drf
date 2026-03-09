@@ -11,3 +11,7 @@ class TodoListCreateView(generics.ListCreateAPIView):
     permission_classes = [AllowAny]
 
 
+class TodoRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Todo.objects.all()
+    serializer_class = TodoSerializer
+    permission_classes = [AllowAny]
