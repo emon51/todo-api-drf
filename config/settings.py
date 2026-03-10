@@ -65,6 +65,8 @@ REST_FRAMEWORK = {
     "EXCEPTION_HANDLER": "config.exceptions.custom_exception_handler",
     "DEFAULT_PAGINATION_CLASS": "config.pagination.CustomPageNumberPagination",
     "PAGE_SIZE": 10,
+    "DEFAULT_FILTER_BACKENDS": [
+        "django_filters.rest_framework.DjangoFilterBackend",
+    ],
 }
-
 
