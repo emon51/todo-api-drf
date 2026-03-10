@@ -1,5 +1,4 @@
 from rest_framework import generics
-from rest_framework.permissions import AllowAny
 
 from .filters import TodoFilter, TodoOrdering
 from .models import Todo
@@ -8,7 +7,6 @@ from .serializers import TodoSerializer
 
 class TodoListCreateView(generics.ListCreateAPIView):
     serializer_class = TodoSerializer
-    permission_classes = [AllowAny]
     filterset_class = TodoFilter
 
     def get_queryset(self):
@@ -24,4 +22,3 @@ class TodoListCreateView(generics.ListCreateAPIView):
 class TodoRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Todo.objects.all()
     serializer_class = TodoSerializer
-    permission_classes = [AllowAny]
