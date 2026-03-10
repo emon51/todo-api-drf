@@ -10,7 +10,7 @@ class TodoListCreateView(generics.ListCreateAPIView):
     filterset_class = TodoFilter
 
     def get_queryset(self):
-        queryset = Todo.objects.all()
+        queryset = Todo.objects.filter(user=self.request.user)
         queryset = TodoOrdering.apply(
             queryset,
             sort_by=self.request.query_params.get("sort_by"),
@@ -18,7 +18,14 @@ class TodoListCreateView(generics.ListCreateAPIView):
         )
         return queryset
 
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)
+
 
 class TodoRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
-    queryset = Todo.objects.all()
     serializer_class = TodoSerializer
+
+    def get_queryset(self):
+        return Todo.objects.filter(user=self.request.user)
+    
+

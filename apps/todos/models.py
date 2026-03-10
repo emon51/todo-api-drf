@@ -7,8 +7,6 @@ class Todo(models.Model):
         settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
         related_name="todos",
-        null=True, 
-        blank=True,
     )
     title = models.CharField(max_length=255)
     description = models.TextField(blank=True, default="")
