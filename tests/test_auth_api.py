@@ -2,6 +2,8 @@ import pytest
 from django.urls import reverse
 from tests.conftest import TEST_PASS
 
+WRONG_PASS = "wrongpass"
+
 
 @pytest.mark.django_db
 class TestRegisterAPI:
@@ -50,7 +52,7 @@ class TestLoginAPI:
     def test_login_wrong_password(self, api_client, user):
         response = api_client.post(reverse("users:login"), {
             "email": "test@example.com",
-            "password": "wrongpass",
+            "password": WRONG_PASS,
         })
         assert response.status_code == 400
         assert "error" in response.data
