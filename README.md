@@ -24,7 +24,7 @@ A REST API for managing todos built with Django and PostgreSQL, running fully in
 ### 1. Clone the repository:
 ```bash
 git clone https://github.com/emon51/todo-api-drf.git
-cd todo_api
+cd todo-api-drf
 ```
 
 ### 2. Create secrets directory and files:
@@ -42,6 +42,28 @@ docker-compose up --build
 ```
 
 API is now running at `http://localhost:8000/api/v1/`
+
+
+## Troubleshooting
+If you see `could not translate host name "db"` error or any error, please run a full clean restart:
+```bash
+# Stop and remove everything
+docker-compose down -v --remove-orphans
+
+# Remove old image
+docker rmi todo_app:latest
+
+# Start fresh
+docker-compose up --build
+```
+
+If the error still persists, kindly clean all Docker cache and try again:
+```bash
+# Warning: this removes all unused Docker data on your machine
+docker system prune -f
+
+docker-compose up --build
+```
 
 ---
 
@@ -92,7 +114,7 @@ docker-compose exec web pytest tests/ -v
 
 ## Project Structure
 ```
-todo_api/
+todo-api-drf/
 ├── config/                 # Project configuration
 │   ├── settings.py         # Django settings
 │   ├── urls.py             # Root URL config
